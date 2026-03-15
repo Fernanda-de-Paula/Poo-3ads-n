@@ -35,15 +35,16 @@ public class Conta {
     }
     //metodo encerrar conta
     public void encerrarConta(){
-        if(this.saldo > 0){
+        if(this.saldo > 0){ // se tiver dinheiro manda sacar
             System.out.println("Erro: Conta possui saldo. Saque R$ "+ saldo + " para prosseguir o encerramento.");
-        }else{
+        }else{ //se tiver zerada, encerra conta
             this.status = false;
             System.out.println("Conta encerrada");
         }
     }
     @Override
     public String toString() {
-        return
+        // Retorna todos os dados formatados [cite: 21]
+        return "Cliente: " + nomeCliente + " | Saldo: R$" + saldo + " | Ativa: " + status;
     }
 }
