@@ -30,6 +30,7 @@ public class Drone {
         if(altura >= 0 && altura <= 120) {
             this.altura = altura;
             System.out.println("Altura setada: " +altura + " m");
+            setBateria(bateria - 10);
         } else {
             System.out.println("Altura inválida, não pode ser negativa ou maior que 120 metros");
         }
@@ -75,23 +76,26 @@ public class Drone {
         return (Math.random()*10)<8;
     }
     public void subir(float x){
-        if(emVoo){
-            if((altura +=x) <= 120){
-                System.out.println("Altura pretendida: " +  (altura+x) + " m");
-                System.out.println("Subir em Voo " + x + " metros");
-                setAltura(altura += x);
-            } else {
-                System.out.println("Altura pretendida: " +  (altura+x) + " m");
-                System.out.println("ERRO! Não é permitido subir acima de 120 metros");
-                setAltura(120);
-                System.out.println("Altura do Drone definida para : " + altura + "m");
+        if(emVoo && bateria >20){
+            float y = this.altura +x;
+            System.out.println("Altura pretendida: " +  y + " m");
+            System.out.println("Subir em Voo " + x + " metros");
+            setAltura(y);
+        } else {
+            System.out.println("Drone precisa estar em voo para subir");
             }
-        }
+
     }
     public void descer(float x){
         if(emVoo){
-            System.out.println("Descer " + x + " metros");
-            setAltura(altura -= x);
+            float y = this.altura -x;
+            System.out.println("Altura pretendida: " +  y + " m");
+            System.out.println("Descer em Voo " + x + " metros");
+            if(y >=0 ) {
+                setAltura(y);
+                if (this.altura == 0) setEmVoo(false);
+                System.out.println("Drone pousado, mostores desligados");
+            }
         }
     }
 
